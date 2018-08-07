@@ -31,6 +31,7 @@ const strings = {
   VAR_TOP: '--mdc-ripple-top',
   VAR_FG_SIZE: '--mdc-ripple-fg-size',
   VAR_FG_SCALE: '--mdc-ripple-fg-scale',
+  VAR_FG_TRANSLATE: '--mdc-ripple-fg-translate',
   VAR_FG_TRANSLATE_START: '--mdc-ripple-fg-translate-start',
   VAR_FG_TRANSLATE_END: '--mdc-ripple-fg-translate-end',
 };

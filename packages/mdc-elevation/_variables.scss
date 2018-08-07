@@ -108,7 +108,7 @@ $mdc-elevation-ambient-map: (
 // The css property used for elevation. In most cases this should not be changed. It is exposed
 // as a variable for abstraction / easy use when needing to reference the property directly, for
 // example in a `will-change` rule.
-$mdc-elevation-property: box-shadow !default;
+$mdc-elevation-property: --mdc-box-shadow !default;
 
 // The default duration value for elevation transitions.
 $mdc-elevation-transition-duration: 280ms !default;

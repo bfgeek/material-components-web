@@ -35,6 +35,17 @@
     }
   }
 
+  @keyframes mdc-ripple-fg-radius-in-paint {
+    from {
+      animation-timing-function: $mdc-animation-standard-curve-timing-function;
+      background-position-x: 0px;
+    }
+
+    to {
+      background-position-x: 1px;
+    }
+  }
+
   @keyframes mdc-ripple-fg-opacity-in {
     from {
       animation-timing-function: linear;
@@ -46,6 +57,17 @@
     }
   }
 
+  @keyframes mdc-ripple-fg-opacity-in-paint {
+    from {
+      animation-timing-function: linear;
+      background-position-y: 0px;
+    }
+
+    to {
+      background-position-y: 1px;
+    }
+  }
+
   @keyframes mdc-ripple-fg-opacity-out {
     from {
       animation-timing-function: linear;
@@ -54,6 +76,19 @@
 
     to {
       opacity: 0;
+    }
+  }
+
+  @keyframes mdc-ripple-fg-opacity-out-paint {
+    from {
+      animation-timing-function: linear;
+      background-position-y: 1px;
+      background-position-x: 1px;
+    }
+
+    to {
+      background-position-y: 0px;
+      background-position-x: 1px;
     }
   }
 }

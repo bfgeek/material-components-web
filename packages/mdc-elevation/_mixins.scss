@@ -21,7 +21,7 @@
 // The $z-value must be between 0 and 24.
 // If $color has an alpha channel, it will be ignored and overridden. To increase the opacity of the shadow, use
 // $opacity-boost.
-@mixin mdc-elevation($z-value, $color: $mdc-elevation-baseline-color, $opacity-boost: 0) {
+@mixin mdc-elevation($z-value, $color: $mdc-elevation-baseline-color, $opacity-boost: 0, $property: box-shadow) {
   @if type-of($z-value) != number or not unitless($z-value) {
     @error "$z-value must be a unitless number, but received '#{$z-value}'";
   }
@@ -40,10 +40,10 @@
   $penumbra-color: rgba($color, $mdc-elevation-penumbra-opacity + $opacity-boost);
   $ambient-color: rgba($color, $mdc-elevation-ambient-opacity + $opacity-boost);
 
-  box-shadow:
+  #{$property}:
     #{"#{$umbra-z-value} #{$umbra-color}"},
     #{"#{$penumbra-z-value} #{$penumbra-color}"},
-    #{$ambient-z-value} $ambient-color;
+    #{$ambient-z-value} #{$ambient-color};
 }
 
 // Returns a string that can be used as the value for a `transition` property for elevation.
@@ -61,3 +61,5 @@
   $easing: $mdc-elevation-transition-timing-function) {
   @return #{$mdc-elevation-property} #{$duration} #{$easing};
 }
+
+// TODO change transition value to background-position-x or something similar.

@@ -381,21 +381,24 @@ class MDCRippleFoundation extends MDCFoundation {
 
   /** @private */
   animateActivation_() {
-    const {VAR_FG_TRANSLATE_START, VAR_FG_TRANSLATE_END} = MDCRippleFoundation.strings;
+    const {VAR_FG_TRANSLATE, VAR_FG_TRANSLATE_START, VAR_FG_TRANSLATE_END} = MDCRippleFoundation.strings;
     const {FG_DEACTIVATION, FG_ACTIVATION} = MDCRippleFoundation.cssClasses;
     const {DEACTIVATION_TIMEOUT_MS} = MDCRippleFoundation.numbers;
 
     this.layoutInternal_();
 
+    let translate = '';
     let translateStart = '';
     let translateEnd = '';
 
     if (!this.adapter_.isUnbounded()) {
-      const {startPoint, endPoint} = this.getFgTranslationCoordinates_();
+      const {point, startPoint, endPoint} = this.getFgTranslationCoordinates_();
+      translate = `${point.x} ${point.y}`;
       translateStart = `${startPoint.x}px, ${startPoint.y}px`;
       translateEnd = `${endPoint.x}px, ${endPoint.y}px`;
     }
 
+    this.adapter_.updateCssVariable(VAR_FG_TRANSLATE, translate);
     this.adapter_.updateCssVariable(VAR_FG_TRANSLATE_START, translateStart);
     this.adapter_.updateCssVariable(VAR_FG_TRANSLATE_END, translateEnd);
     // Cancel any ongoing activation/deactivation animations
@@ -417,22 +420,22 @@ class MDCRippleFoundation extends MDCFoundation {
   getFgTranslationCoordinates_() {
     const {activationEvent, wasActivatedByPointer} = this.activationState_;
 
-    let startPoint;
+    let point;
     if (wasActivatedByPointer) {
-      startPoint = getNormalizedEventCoords(
+      point = getNormalizedEventCoords(
         /** @type {!Event} */ (activationEvent),
         this.adapter_.getWindowPageOffset(), this.adapter_.computeBoundingRect()
       );
     } else {
-      startPoint = {
+      point = {
         x: this.frame_.width / 2,
         y: this.frame_.height / 2,
       };
     }
     // Center the element around the start point.
-    startPoint = {
-      x: startPoint.x - (this.initialSize_ / 2),
-      y: startPoint.y - (this.initialSize_ / 2),
+    const startPoint = {
+      x: point.x - (this.initialSize_ / 2),
+      y: point.y - (this.initialSize_ / 2),
     };
 
     const endPoint = {
@@ -440,7 +443,7 @@ class MDCRippleFoundation extends MDCFoundation {
       y: (this.frame_.height / 2) - (this.initialSize_ / 2),
     };
 
-    return {startPoint, endPoint};
+    return {point, startPoint, endPoint};
   }
 
   /** @private */
